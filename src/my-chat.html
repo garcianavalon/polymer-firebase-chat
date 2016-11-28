@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="./chat-message.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-chat">
@@ -34,7 +35,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <h1>Chat with the Wizardkings!</h1>
 
       <template is="dom-repeat" items="{{messages}}" as="message">
-        <p>{{message}}</p>
+        <chat-message message="{{message}}"></chat-message>
       </template>
 
       <paper-input label="your chat message" value="{{newMessage}}"></paper-input>
