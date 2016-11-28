@@ -10,6 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-document.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="./chat-message.html">
@@ -31,6 +32,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       data="{{messages}}">
     </firebase-query>
 
+    <firebase-document
+      id="save"
+      path="/messages/{{newMessageId}}"
+      data="{{newMessage}}">
+    </firebase-document>
+
     <div class="card">
       <h1>Chat with the Wizardkings!</h1>
 
@@ -38,7 +45,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <chat-message message="{{message}}"></chat-message>
       </template>
 
-      <paper-input label="your chat message" value="{{newMessage}}"></paper-input>
+      <paper-input label="your chat message" value="{{text}}"></paper-input>
       <paper-icon-button id="sendButton" icon="chat" title="send"></paper-icon-button>
     </div>
   </template>
@@ -48,18 +55,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'my-chat',
 
       properties: {
-        user_from: {
-          type: String,
-          // TODO(garcianavalon) use real id from database
-          value: 'test_user_id',
-        },
-
-        user_to: {
-          type: String,
-          value: 'imabot',
-        },
-
         newMessage: {
+          type: Object,
+        },
+
+        text: {
+          type: String,
+          value: '',
+        },
+
+        newMessageId: {
           type: String,
           value: '',
         },
@@ -70,9 +75,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _sendMessage: function(evt) {
-        console.log('Sending message %o', this.newMessage);
-        // TODO(garcianavalon) send to firebase
-        this.newMessage = '';
+        const newMessage =  {
+          user_to: 'imabot',
+          // TODO(garcianavalon) use real id from database
+          user_from: 'test_user_id',
+          text: this.text,
+        }
+        console.log('Sending message %o', newMessage);
+        this.set('newMessageId', Math.random().toString(36).substring(7));
+        this.set('newMessage', newMessage);
       },
 
     });
