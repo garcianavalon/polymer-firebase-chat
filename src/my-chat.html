@@ -38,8 +38,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <p>{{message}}</p>
       </template>
 
-      <paper-input label="text input">{{newMessage.text}}</paper-input>
-      <paper-icon-button icon="chat" title="send"></paper-icon-button>
+      <paper-input label="your chat message" value="{{newMessage}}"></paper-input>
+      <paper-icon-button id="sendButton" icon="chat" title="send"></paper-icon-button>
     </div>
   </template>
 
@@ -48,13 +48,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'my-chat',
 
       properties: {
+        user_from: {
+          type: String,
+          // TODO(garcianavalon) use real id from database
+          value: 'test_user_id',
+        },
+
+        user_to: {
+          type: String,
+          value: 'imabot',
+        },
+
         newMessage: {
-          type: Object,
-          value: function() {
-            return {};
-          },
-        }
-      }
+          type: String,
+          value: '',
+        },
+      },
+
+      listeners: {
+        'sendButton.tap': '_sendMessage',
+      },
+
+      _sendMessage: function(evt) {
+        console.log('Sending message %o', this.newMessage);
+        // TODO(garcianavalon) send to firebase
+        this.newMessage = '';
+      },
+
     });
   </script>
 </dom-module>
