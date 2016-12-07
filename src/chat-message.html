@@ -20,23 +20,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         padding: 5px;
       }
-      .avatar{
-        display: inline-block;
-        box-sizing: border-box;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: #ffc107;
-        background-size: contain;
-      }
       .text{
         padding: 10px 15px;
         color: white;
         border-radius: 5px;
         font-size: larger;
-      }
-      .me .avatar{
-        background-image: var(--my-avatar-image);
       }
       .me .text{
         background-color: var(--paper-pink-a200);
@@ -66,12 +54,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         user: Object
       },
 
-      ready: function() {
-        this.customStyle['--my-avatar-image'] = 'url(' + this.user.photoURL + ')';
-        this.updateStyles();
-      },
-
       _getUserClass: function(user, message) {
+        if(!user || !message) return '';
         if(message.user_from === user.uid){
           return 'me';
         }else{
