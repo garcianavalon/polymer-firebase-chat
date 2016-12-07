@@ -35,7 +35,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <h1>Sus majestades al aparato! ¿Qué desea?</h1>
 
     <template is="dom-repeat" items="{{messages}}" as="message">
-      <chat-message message="[[message]]"></chat-message>
+      <chat-message message="[[message]]" user="[[user]]"></chat-message>
     </template>
 
     <iron-a11y-keys
