@@ -36,7 +36,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <h1>Sus majestades al aparato! ¿Qué desea?</h1>
 
       <template is="dom-repeat" items="{{messages}}" as="message">
-        <chat-message message="[[message.content]]"></chat-message>
+        <chat-message message="[[message]]"></chat-message>
       </template>
 
       <iron-a11y-keys
@@ -79,10 +79,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _sendMessage: function() {
         this.$.query.ref.push({
-          content: {
-            user_from: this.user.uid,
-            text: this.$.input.value,
-          },
+          user_from: this.user.uid,
+          text: this.$.input.value,
         });
 
         this.$.input.value = null;
