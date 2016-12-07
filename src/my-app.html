@@ -71,7 +71,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       storage-bucket="polymer-firebase-chat.appspot.com"
       api-key="AIzaSyBBS1-G5RCxSoRTy8Z5kUZiwcexECw7R1c">
     </firebase-app>
-    
+
     <firebase-auth id="auth" user="{{user}}" provider="google" on-error="handleError">
     </firebase-auth>
 
@@ -91,7 +91,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </app-toolbar>
         </app-header>
 
-          <my-chat name="chat"></my-chat>
+          <my-chat
+            name="chat"
+            user="[[user]]">
+          </my-chat>
 
       </app-header-layout>
     </app-drawer-layout>

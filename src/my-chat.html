@@ -10,7 +10,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-query.html">
-<link rel="import" href="../bower_components/polymerfire/firebase-document.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="./chat-message.html">
@@ -28,24 +27,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <firebase-query
       id="query"
-      path="/messages"
+      path="/users/[[user.uid]]/messages"
       data="{{messages}}">
     </firebase-query>
-
-    <firebase-document
-      id="save"
-      path="/messages/{{newMessageId}}"
-      data="{{newMessage}}">
-    </firebase-document>
 
     <div class="card">
       <h1>Chat with the Wizardkings!</h1>
 
       <template is="dom-repeat" items="{{messages}}" as="message">
-        <chat-message message="{{message}}"></chat-message>
+        <chat-message message="[[message.content]]"></chat-message>
       </template>
 
-      <paper-input label="your chat message" value="{{text}}"></paper-input>
+      <paper-input id="input" label="your chat message"></paper-input>
       <paper-icon-button id="sendButton" icon="chat" title="send"></paper-icon-button>
     </div>
   </template>
@@ -55,35 +48,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'my-chat',
 
       properties: {
-        newMessage: {
-          type: Object,
-        },
-
-        text: {
-          type: String,
-          value: '',
-        },
-
-        newMessageId: {
-          type: String,
-          value: '',
-        },
+        user: Object,
+        messages: Object,
       },
 
       listeners: {
         'sendButton.tap': '_sendMessage',
       },
 
-      _sendMessage: function(evt) {
-        const newMessage =  {
-          user_to: 'imabot',
-          // TODO(garcianavalon) use real id from database
-          user_from: 'test_user_id',
-          text: this.text,
-        }
-        console.log('Sending message %o', newMessage);
-        this.set('newMessageId', Math.random().toString(36).substring(7));
-        this.set('newMessage', newMessage);
+      _sendMessage: function() {
+        this.$.query.ref.push({
+          content: {
+            user_from: this.user.uid,
+            text: this.$.input.value,
+          },
+        });
+
+        this.$.input.value = null;
       },
 
     });
