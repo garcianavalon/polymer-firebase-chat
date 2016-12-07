@@ -86,13 +86,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
             <div main-title>Chat Real - Polymer Edition</div>
             <div class="" hidden$="[[!user]]">
-              {{user.displayName}}
               <img src="{{user.photoURL}}" alt="avatar" class="avatar">
+              {{user.displayName}}
+              <paper-button on-tap="logout">
+                LOG OUT
+              </paper-button>
             </div>
 
-            <paper-button id="logInButton" hidden$="[[user]]" on-tap="_logIn">
+            <paper-button hidden$="[[user]]" on-tap="login">
               LOG IN
-              <iron-icon icon="account-circle"></iron-icon>
             </paper-button>
 
           </app-toolbar>
@@ -124,15 +126,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       },
 
-      _logIn: function(evt){
-        this.$.auth.signInWithPopup()
-          .then(function(response) {
-            // successful authentication response here
-          })
-          .catch(function(error) {
-            // unsuccessful authentication response here
-            console.error('something went wrong :( %o', error);
-          });
+      login: function(){
+        this.$.auth.signInWithPopup();
+      },
+
+      logout: function(){
+        this.$.auth.signOut();
       },
 
 
