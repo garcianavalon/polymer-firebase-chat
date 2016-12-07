@@ -66,10 +66,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <firebase-app
-      auth-domain="react-firebase-chat-74da6.firebaseapp.com"
-      database-url="https://react-firebase-chat-74da6.firebaseio.com/"
-      api-key="AIzaSyBTKeSmJ-EZT8gFtdQxTdvcw3kDv1xK4pc">
+      auth-domain="polymer-firebase-chat.firebaseapp.com"
+      database-url="https://polymer-firebase-chat.firebaseio.com"
+      storage-bucket="polymer-firebase-chat.appspot.com"
+      api-key="AIzaSyBBS1-G5RCxSoRTy8Z5kUZiwcexECw7R1c">
     </firebase-app>
+    
     <firebase-auth id="auth" user="{{user}}" provider="google" on-error="handleError">
     </firebase-auth>
 
