@@ -32,33 +32,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       data="{{messages}}">
     </firebase-query>
 
-    <div class="card">
-      <h1>Sus majestades al aparato! ¿Qué desea?</h1>
+    <h1>Sus majestades al aparato! ¿Qué desea?</h1>
 
-      <template is="dom-repeat" items="{{messages}}" as="message">
-        <chat-message message="[[message]]"></chat-message>
-      </template>
+    <template is="dom-repeat" items="{{messages}}" as="message">
+      <chat-message message="[[message]]"></chat-message>
+    </template>
 
-      <iron-a11y-keys
-        id="a11y"
-        target="[[target]]"
-        keys="enter"
-        on-keys-pressed="_sendMessage">
-      </iron-a11y-keys>
+    <iron-a11y-keys
+      id="a11y"
+      target="[[target]]"
+      keys="enter"
+      on-keys-pressed="_sendMessage">
+    </iron-a11y-keys>
 
-      <paper-input
-        id="input"
-        label="Type your message! Press enter to send or tap the button." >
-      </paper-input>
+    <paper-input
+      id="input"
+      label="Type your message! Press enter to send or tap the button." >
+    </paper-input>
 
-      <paper-icon-button
-        id="sendButton"
-        icon="chat"
-        title="send"
-        on-tap="_sendMessage">
-      </paper-icon-button>
+    <paper-icon-button
+      id="sendButton"
+      icon="chat"
+      title="send"
+      on-tap="_sendMessage">
+    </paper-icon-button>
 
-    </div>
   </template>
 
   <script>
