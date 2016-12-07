@@ -98,12 +98,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class="" hidden$="[[!user]]">
               <img src="{{user.photoURL}}" alt="avatar" class="avatar">
               {{user.displayName}}
-              <paper-button on-tap="logout">
+              <paper-button raised class="pink small" on-tap="logout">
                 LOG OUT
               </paper-button>
             </div>
 
-            <paper-button hidden$="[[user]]" on-tap="login">
+            <paper-button raised class="pink small" hidden$="[[user]]" on-tap="login">
               LOG IN
             </paper-button>
 
