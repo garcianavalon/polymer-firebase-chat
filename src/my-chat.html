@@ -33,9 +33,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         bottom: 0;
         right: 0;
         left: 0;
-      }
-      .button{
-        color: var(--paper-pink-a200);
+        background-color: var(--paper-light-blue-50);
+        padding: 20px;
       }
     </style>
 
@@ -53,7 +52,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       id="a11y"
       target="[[target]]"
       keys="enter"
-      on-keys-pressed="_sendMessage">
+      on-keys-pressed="sendMessage">
     </iron-a11y-keys>
 
     <paper-item class="input_box">
@@ -64,11 +63,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-input>
       </paper-item-body>
       <paper-icon-button
-        id="sendButton"
-        class="button"
+        class="button pink"
         icon="chat"
         title="send"
-        on-tap="_sendMessage">
+        on-tap="sendMessage">
+      </paper-icon-button>
+      <paper-icon-button
+        class="button pink"
+        icon="delete-forever"
+        title="delete forever"
+        on-tap="removeMessages">
       </paper-icon-button>
   </paper-item>
   </template>
@@ -89,7 +93,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
       },
 
-      _sendMessage: function() {
+      removeMessages: function() {
+        this.$.query.ref.remove();
+        this.$.input.value = null;
+      },
+
+      sendMessage: function() {
+        if (!this.$.input.value) {
+          return;
+        }
+        
         this.$.query.ref.push({
           user_from: this.user.uid,
           text: this.$.input.value,
