@@ -20,8 +20,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="my-icons.html">
 <link rel="import" href="my-chat.html">
 <dom-module id="my-app">
@@ -88,20 +89,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               {{user.displayName}}
               <img src="{{user.photoURL}}" alt="avatar" class="avatar">
             </div>
-            <paper-icon-button
-              id="logInButton"
-              icon="account-circle"
-              hidden$="[[user]]"
-              title="log in">
-            </paper-icon-button>
+
+            <paper-button id="logInButton" hidden$="[[user]]" on-tap="_logIn">
+              LOG IN
+              <iron-icon icon="account-circle"></iron-icon>
+            </paper-button>
 
           </app-toolbar>
         </app-header>
 
-          <my-chat
-            name="chat"
-            user="[[user]]">
-          </my-chat>
+          <template is="dom-if" if="[[user]]">
+            <my-chat user="[[user]]"></my-chat>
+          </template>
+          <template is="dom-if" if="[[!user]]">
+            <div class="">
+              <p>Bienvenido al Chat Real! Sus majestades solo hablan con gente autenticada, por favor inicia sesión.</p>
+            </div>
+          </template>
 
       </app-header-layout>
     </app-drawer-layout>
@@ -118,10 +122,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             return {};
           },
         }
-      },
-
-      listeners: {
-        'logInButton.tap': '_logIn'
       },
 
       _logIn: function(evt){
