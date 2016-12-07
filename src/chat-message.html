@@ -9,6 +9,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="chat-message">
@@ -16,17 +18,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
-
         padding: 10px;
+      }
+      .avatar{
+        display: inline-block;
+        box-sizing: border-box;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #ffc107;
+        background-size: contain;
+      }
+      .text{
+        padding: 5px;
+        color: white;
+        border-radius: 5px;
+      }
+      .me .avatar{
+        background-image: var(--my-avatar-image);
+      }
+      .me .text{
+        background-color: var(--paper-pink-a200);
+      }
+      .bot .avatar{
+        background-image: url('https://placekitten.com/50/50');
+      }
+      .bot .text{
+        background-color: var(--paper-indigo-500);
       }
     </style>
 
     <div class="blob">
-      <p>
-        From: {{message.user_from}}
-        To: {{message.user_to}}
-        Text: {{message.text}}
-      </p>
+      <paper-icon-item class$="{{_getUserClass(user, message)}}">
+        <div class="avatar" item-icon></div>
+        <span class="text">{{message.text}}</span>
+      </paper-icon-item>
     </div>
   </template>
 
@@ -36,7 +62,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       properties: {
         message: Object,
+        user: Object
       },
+
+      ready: function() {
+        this.customStyle['--my-avatar-image'] = 'url(' + this.user.photoURL + ')';
+        this.updateStyles();
+      },
+ 
+      _getUserClass: function(user, message) {
+        if(message.user_from === user.uid){
+          return 'me';
+        }else{
+          return 'bot';
+        }
+      }
 
     });
   </script>
