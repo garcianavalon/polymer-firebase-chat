@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-a11y-keys/iron-a11y-keys.html">
 <link rel="import" href="./chat-message.html">
 <link rel="import" href="shared-styles.html">
 
@@ -38,8 +39,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <chat-message message="[[message.content]]"></chat-message>
       </template>
 
-      <paper-input id="input" label="your chat message"></paper-input>
-      <paper-icon-button id="sendButton" icon="chat" title="send"></paper-icon-button>
+      <iron-a11y-keys
+        id="a11y"
+        target="[[target]]"
+        keys="enter"
+        on-keys-pressed="_sendMessage">
+      </iron-a11y-keys>
+
+      <paper-input
+        id="input"
+        label="Type your message! Press enter to send or tap the button." >
+      </paper-input>
+
+      <paper-icon-button
+        id="sendButton"
+        icon="chat"
+        title="send"
+        on-tap="_sendMessage">
+      </paper-icon-button>
+
     </div>
   </template>
 
@@ -50,10 +68,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       properties: {
         user: Object,
         messages: Object,
-      },
 
-      listeners: {
-        'sendButton.tap': '_sendMessage',
+        target: {
+          type: Object,
+          value: function() {
+            return this.$.input;
+          }
+        },
       },
 
       _sendMessage: function() {
