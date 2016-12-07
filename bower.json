@@ -20,7 +20,8 @@
     "paper-input": "PolymerElements/paper-input#^1.1.22",
     "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^1.0.6",
     "paper-button": "PolymerElements/paper-button#^1.0.14",
-    "paper-item": "^1.2.1"
+    "paper-item": "^1.2.1",
+    "iron-scroll-target-behavior": "PolymerElements/iron-scroll-target-behavior#^1.1.0"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
