@@ -18,7 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
-        padding: 10px;
+        padding: 5px;
       }
       .avatar{
         display: inline-block;
@@ -30,9 +30,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-size: contain;
       }
       .text{
-        padding: 5px;
+        padding: 10px 15px;
         color: white;
         border-radius: 5px;
+        font-size: larger;
       }
       .me .avatar{
         background-image: var(--my-avatar-image);
@@ -69,7 +70,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.customStyle['--my-avatar-image'] = 'url(' + this.user.photoURL + ')';
         this.updateStyles();
       },
- 
+
       _getUserClass: function(user, message) {
         if(message.user_from === user.uid){
           return 'me';

@@ -66,9 +66,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       /* Our Styles */
       .chat-title {
-        padding: 16px 16px;
+        padding: 20px;
         background-color: #e1f5fe;
         color: #0288d1;
+      }
+
+      .chat-title iron-icon {
+        padding-right: 10px;
       }
     </style>
 
@@ -108,7 +112,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           <template is="dom-if" if="[[user]]">
             <div class="chat-title">
-              <span>Sus majestades al aparato! ¿Qué desea?</span>
+              <span><iron-icon icon="contact"></iron-icon>Sus majestades al aparato! ¿Qué desea?</span>
             </div>
             <my-chat user="[[user]]"></my-chat>
           </template>
