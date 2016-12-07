@@ -64,6 +64,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         font-weight: bold;
       }
+      /* Our Styles */
+      .chat-title {
+        padding: 16px 16px;
+        background-color: #e1f5fe;
+        color: #0288d1;
+      }
     </style>
 
     <firebase-app
@@ -101,6 +107,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-header>
 
           <template is="dom-if" if="[[user]]">
+            <div class="chat-title">
+              <span>Sus majestades al aparato! ¿Qué desea?</span>
+            </div>
             <my-chat user="[[user]]"></my-chat>
           </template>
           <template is="dom-if" if="[[!user]]">
