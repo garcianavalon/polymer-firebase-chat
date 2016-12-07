@@ -26,7 +26,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="my-chat.html">
 <dom-module id="my-app">
   <template>
-    <style>
+    <style include="shared-styles">
       :host {
         --app-primary-color: #4285f4;
         --app-secondary-color: black;
@@ -83,11 +83,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
-            <div class="">
+            <div main-title>Chat Real - Polymer Edition</div>
+            <div class="" hidden$="[[!user]]">
               {{user.displayName}}
-              <paper-icon-button id="logInButton" icon="account-circle" title="log in"></paper-icon-button>
+              <img src="{{user.photoURL}}" alt="avatar" class="avatar">
             </div>
+            <paper-icon-button
+              id="logInButton"
+              icon="account-circle"
+              hidden$="[[user]]"
+              title="log in">
+            </paper-icon-button>
+
           </app-toolbar>
         </app-header>
 
@@ -121,7 +128,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.$.auth.signInWithPopup()
           .then(function(response) {
             // successful authentication response here
-            console.log('we did it! %o', response);
           })
           .catch(function(error) {
             // unsuccessful authentication response here
