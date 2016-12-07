@@ -12,6 +12,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/iron-a11y-keys/iron-a11y-keys.html">
 <link rel="import" href="./chat-message.html">
 <link rel="import" href="shared-styles.html">
@@ -22,6 +25,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
         padding: 10px;
+        height: 100%;
+        background-color: #fff;
+      }
+      .input_box{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+      }
+      .button{
+        color: var(--paper-pink-a200);
       }
     </style>
 
@@ -42,18 +56,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       on-keys-pressed="_sendMessage">
     </iron-a11y-keys>
 
-    <paper-input
-      id="input"
-      label="Type your message! Press enter to send or tap the button." >
-    </paper-input>
-
-    <paper-icon-button
-      id="sendButton"
-      icon="chat"
-      title="send"
-      on-tap="_sendMessage">
-    </paper-icon-button>
-
+    <paper-item class="input_box">
+      <paper-item-body>
+        <paper-input
+          id="input"
+          label="Type your message! Press enter to send or tap the button." >
+        </paper-input>
+      </paper-item-body>
+      <paper-icon-button
+        id="sendButton"
+        class="button"
+        icon="chat"
+        title="send"
+        on-tap="_sendMessage">
+      </paper-icon-button>
+  </paper-item>
   </template>
 
   <script>
