@@ -64,13 +64,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-input>
       </paper-item-body>
       <paper-icon-button
-        class="button pink"
+        class="button blue"
         icon="chat"
         title="send"
         on-tap="sendMessage">
       </paper-icon-button>
       <paper-icon-button
-        class="button pink"
+        class="button blue"
         icon="delete-forever"
         title="delete forever"
         on-tap="removeMessages">
@@ -84,7 +84,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       properties: {
         user: Object,
-        messages: Object,
+        messages: Array,
 
         target: {
           type: Object,
